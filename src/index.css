@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f7f4;
+    --text-primary: #0f3b0f;
+    --text-secondary: #476847;
+    --border: rgba(45,158,45,0.15);
+    --card-bg: rgba(255,255,255,0.8);
+    --nav-bg: rgba(255,255,255,0.85);
+  }
+
+  .dark {
+    --bg-primary: #0a1a0a;
+    --bg-secondary: #111d11;
+    --text-primary: #e8f5e8;
+    --text-secondary: #7da17d;
+    --border: rgba(45,158,45,0.2);
+    --card-bg: rgba(15,30,15,0.8);
+    --nav-bg: rgba(10,26,10,0.9);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply transition-colors duration-300;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .nav-glass {
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #2d9e2d 0%, #4ab84a 50%, #7dd07d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-200;
+    background: linear-gradient(135deg, #1f7d1f, #2d9e2d);
+    box-shadow: 0 4px 14px rgba(45,158,45,0.35);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(45,158,45,0.45);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200;
+    border: 1.5px solid var(--border);
+    color: var(--text-primary);
+  }
+
+  .btn-outline:hover {
+    border-color: #2d9e2d;
+    background: rgba(45,158,45,0.05);
+  }
+
+  .section-tag {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest;
+    background: rgba(45,158,45,0.1);
+    color: #2d9e2d;
+    border: 1px solid rgba(45,158,45,0.2);
+  }
+
+  .input-drop {
+    border: 2px dashed var(--border);
+    transition: all 0.2s ease;
+  }
+
+  .input-drop:hover, .input-drop.dragover {
+    border-color: #2d9e2d;
+    background: rgba(45,158,45,0.04);
+  }
+
+  .shimmer-line {
+    background: linear-gradient(90deg, var(--border) 25%, rgba(45,158,45,0.15) 50%, var(--border) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/* Scan line animation for loading */
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2d9e2d, transparent);
+  animation: scan 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(45,158,45,0.3);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(45,158,45,0.5);
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+.animate-on-load {
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s infinite;
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
